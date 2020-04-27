@@ -38,7 +38,6 @@ public class EmployeeController {
     @GetMapping("/crear")
     public String crearEmployee(){
 
-
         return "employee/crear";
     }
 
@@ -67,6 +66,17 @@ public class EmployeeController {
         } else {
             return "redirect:/employee/lista";
         }
+    }
+
+    @PostMapping("/buscar")
+    public String buscarEmployee(@RequestParam("searchfield") String searchfield,
+                                 Model model){
+
+        List<EmployeeEntity> listaempleados = employeeRepository.findByEmail(searchfield);
+        model.addAttribute("lista1",listaempleados);
+
+        return "employee/listar";
+
     }
 
 
